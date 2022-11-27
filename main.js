@@ -1,7 +1,7 @@
 function doPost(e){
   var estringa = JSON.parse(e.postData.contents);
   var d = new Date();
-  var SpreadSheet = SpreadsheetApp.openById("1D0zJv8yFJn-PjEfLDnEOTU8n8S5aQm7EiGZ55k9rRyE");
+  var SpreadSheet = SpreadsheetApp.openById(sheet_id);
   var Sheet = SpreadSheet.getSheetByName("紀錄收到的訊息");
   var LastRow = Sheet.getLastRow();
   Sheet.getRange(LastRow+1, 1).setValue(d);  
@@ -63,7 +63,7 @@ function identificar(e){
   var message = e.message.text;
   if (e.message.new_chat_members){
     var user1 = e.message.new_chat_participant.first_name;
-    var SpreadSheet = SpreadsheetApp.openById("1CNqBmvbThO0KWsD_k9CBfyR_t3KEvatwB5TizDghnRA");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet = SpreadSheet.getSheetByName("訊息"); 
     var msg = Sheet.getRange(1, 1).getValue(); 
     if(e.message.new_chat_participant.last_name)
@@ -86,7 +86,7 @@ function identificar(e){
        "disable_notification":true,
        'reply_markup': JSON.stringify(InlineKeyboardMarkup)
     } 
-      var SpreadSheets = SpreadsheetApp.openById("1ub3m5ccwpnSW4y7nnjRHlywZqg29KOm7GFkkifPVVdE");
+      var SpreadSheets = SpreadsheetApp.openById(sheet_id);
       var Sheets = SpreadSheets.getSheetByName("verify"); 
       var LastRows = Sheets.getLastRow();
       Sheets.getRange(LastRows+1, 1).setValue(userid);
@@ -105,7 +105,7 @@ function identificar(e){
         "user_id": userid,
         "permissions":ChatPermissions
       }
-      var returneds = UrlFetchApp.fetch("https://api.telegram.org/bot1122400522:AAHS3fJlQqOjPqNt9jcGflN-KsOZN74NjvM/restrictChatMember", restrict);
+      var returneds = UrlFetchApp.fetch("https://api.telegram.org/apikey/restrictChatMember", restrict);
       Logger.log(returneds.getContentText());
       var a = JSON.parse(e.message.message_id);
       var b = ~~a;
@@ -135,7 +135,7 @@ function identificar(e){
        "disable_notification":true,
        'reply_markup': JSON.stringify(InlineKeyboardMarkup)
     } 
-      var SpreadSheets = SpreadsheetApp.openById("1ub3m5ccwpnSW4y7nnjRHlywZqg29KOm7GFkkifPVVdE");
+      var SpreadSheets = SpreadsheetApp.openById(sheet_id);
       var Sheets = SpreadSheets.getSheetByName("verify"); 
       var LastRows = Sheets.getLastRow();
       Sheets.getRange(LastRows+1, 1).setValue(userid);
@@ -154,7 +154,7 @@ function identificar(e){
         "user_id": userid,
         "permissions":ChatPermissions
       }
-      var returneds = UrlFetchApp.fetch("https://api.telegram.org/bot1122400522:AAHS3fJlQqOjPqNt9jcGflN-KsOZN74NjvM/restrictChatMember", restrict);
+      var returneds = UrlFetchApp.fetch("https://api.telegram.org/apikey/restrictChatMember", restrict);
       Logger.log(returneds.getContentText());
       var a = JSON.parse(e.message.message_id);
       var b = ~~a;
@@ -313,7 +313,7 @@ function identificar(e){
   else if (message.substring(0,8)=="/weather"){
     var place = message.substr(9,message.length-9);
     var place1 = LanguageApp.translate(place, 'zh', 'en');
-    var weadata = UrlFetchApp.fetch("http://api.openweathermap.org/data/2.5/weather?q="+place1+"&units=metric&appid=99b901186201f09a35d3ca104f55f33f&lang=zh_tw");
+    var weadata = UrlFetchApp.fetch("http://api.openweathermap.org/data/2.5/weather?q="+place1+"&units=metric&appid=apikey&lang=zh_tw");
     var data = JSON.parse(weadata);
     var code = JSON.stringify(data.message);
     if(code=="city not found")
@@ -585,7 +585,7 @@ function identificar(e){
     var data2 = data.split("/",2);
     var keyword = data2[0];
     var reply = data2[1];
-    var SpreadSheet = SpreadsheetApp.openById("1-nUCL9ekNbdGv7mHt3iVm4ZLC6gRD6F5ez4rPoacHs4");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id");
     var Sheet = SpreadSheet.getSheetByName("關鍵字"); 
     var LastRow = Sheet.getLastRow();
     var check = 0;
@@ -605,7 +605,7 @@ function identificar(e){
     {
       if(reply)
       {
-        var SpreadSheet = SpreadsheetApp.openById("1-nUCL9ekNbdGv7mHt3iVm4ZLC6gRD6F5ez4rPoacHs4");
+        var SpreadSheet = SpreadsheetApp.openById(sheet_id);
       var Sheet = SpreadSheet.getSheetByName("關鍵字"); 
     var LastRow = Sheet.getLastRow();
     Sheet.getRange(LastRow+1, 1).setValue(keyword);  
@@ -642,7 +642,7 @@ function identificar(e){
   }
   ///////////////////////////
   else if (message=="/msgcount@Bandbbs_bot"){
-    var SpreadSheet = SpreadsheetApp.openById("1D0zJv8yFJn-PjEfLDnEOTU8n8S5aQm7EiGZ55k9rRyE");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet = SpreadSheet.getSheetByName("紀錄收到的訊息");
     var LastRow = Sheet.getLastRow();
     var result = 0;
@@ -668,7 +668,7 @@ function identificar(e){
   }
   
   else if (message=="重要消息"||message=="/important@Bandbbs_bot"){
-    var SpreadSheet = SpreadsheetApp.openById("1CNqBmvbThO0KWsD_k9CBfyR_t3KEvatwB5TizDghnRA");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet = SpreadSheet.getSheetByName("訊息"); 
     var msg = Sheet.getRange(1, 1).getValue(); 
     var Sheet2 = SpreadSheet.getSheetByName("圖片"); 
@@ -697,7 +697,7 @@ function identificar(e){
       "chat_id": String(e.message.chat.id),
       "text": "好的! 將 "+msg+" 設置為重要消息",
     } 
-    var SpreadSheet = SpreadsheetApp.openById("1CNqBmvbThO0KWsD_k9CBfyR_t3KEvatwB5TizDghnRA");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet = SpreadSheet.getSheetByName("訊息"); 
     Sheet.getRange(1, 1).setValue(msg);
       start(payload);
@@ -716,7 +716,7 @@ function identificar(e){
     if(e.message.from.username=="kindyear"||e.message.from.username=="Jinyulink"||e.message.from.username=="Mifan426"||e.message.from.username=="cworld0")
     {
     var url = message.str(19,message.length-19);
-    var SpreadSheet = SpreadsheetApp.openById("1CNqBmvbThO0KWsD_k9CBfyR_t3KEvatwB5TizDghnRA");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet3 = SpreadSheet.getSheetByName("圖片"); 
     Sheet3.getRange(1, 1).setValue(url);
     var payload = {
@@ -737,7 +737,7 @@ function identificar(e){
     }
     }
   else {
-    var SpreadSheet = SpreadsheetApp.openById("1-nUCL9ekNbdGv7mHt3iVm4ZLC6gRD6F5ez4rPoacHs4");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     
     var Sheet = SpreadSheet.getSheetByName("關鍵字"); 
     var LastRow = Sheet.getLastRow();
@@ -781,12 +781,12 @@ function start(payload) {
         "payload": payload
     }
     var d = new Date();
-    var SpreadSheet = SpreadsheetApp.openById("1D0zJv8yFJn-PjEfLDnEOTU8n8S5aQm7EiGZ55k9rRyE");
+    var SpreadSheet = SpreadsheetApp.openById(sheet_id);
     var Sheet = SpreadSheet.getSheetByName("紀錄發送的訊息");
     var LastRow = Sheet.getLastRow();
     Sheet.getRange(LastRow + 1, 1).setValue(d);
     Sheet.getRange(LastRow + 1, 3).setValue(data);
-    var returned = UrlFetchApp.fetch("https://api.telegram.org/bot1122400522:AAHS3fJlQqOjPqNt9jcGflN-KsOZN74NjvM/", data);
+    var returned = UrlFetchApp.fetch("https://api.telegram.org/api_key/", data);
     Logger.log(returned.getContentText());
     Sheet.getRange(LastRow + 1, 2).setValue(d);
 }
